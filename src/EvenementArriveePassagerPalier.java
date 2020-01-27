@@ -1,3 +1,5 @@
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 public class EvenementArriveePassagerPalier extends Evenement {
     /* APP: Arrivée Passager Palier
        L'instant précis ou un nouveau passager arrive sur un palier donné.
@@ -20,5 +22,11 @@ public class EvenementArriveePassagerPalier extends Evenement {
 		assert immeuble.étage(étage.numéro()) == étage;
 		Passager p = new Passager(date, étage, immeuble);
 		étage.ajouter(p);
+		if(étage == immeuble.cabine.étage) {
+			//if(date <= immeuble.cabine.)
+			notYetImplemented();
+		} else {
+			notYetImplemented();
+		}
     }
 }
