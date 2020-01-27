@@ -13,41 +13,41 @@ public class Passager {
     private Etage étageDestination;
 
     public long dateDépart() {
-	return this.dateDépart;
+		return this.dateDépart;
     }
 
     public Etage étageDépart() {
-	return this.étageDépart;
+		return this.étageDépart;
     }
 
     public int numéroDepart() {
-	return this.étageDépart.numéro();
+		return this.étageDépart.numéro();
     }
 
     public Etage étageDestination() {
-	return this.étageDestination;
+		return this.étageDestination;
     }
 
     public int numéroDestination() {
-	return this.étageDestination.numéro();
+		return this.étageDestination.numéro();
     }
 
     public Passager(long dateDeDepart, Etage etageDeDepart, Immeuble immeuble) {
-	Etage niveauDuSol = immeuble.niveauDuSol();
-	int nbEtages = immeuble.nbEtages();
-	étageDépart = etageDeDepart;
-	dateDépart = dateDeDepart;
-	compteurGlobalDeCreationDesPassagers++;
-	numéroDeCréation = compteurGlobalDeCreationDesPassagers;
-	if (étageDépart == niveauDuSol) {
-	    étageDestination = niveauDuSol;
-	    while (étageDestination == niveauDuSol) {
-		int auPif = randomGenerator.intSuivant(nbEtages);
-		étageDestination = immeuble.étage(auPif + immeuble.étageLePlusBas().numéro() - 1);
-	    }
-	} else {
-	    étageDestination = niveauDuSol;
-	}
+		Etage niveauDuSol = immeuble.niveauDuSol();
+		int nbEtages = immeuble.nbEtages();
+		étageDépart = etageDeDepart;
+		dateDépart = dateDeDepart;
+		compteurGlobalDeCreationDesPassagers++;
+		numéroDeCréation = compteurGlobalDeCreationDesPassagers;
+		if (étageDépart == niveauDuSol) {
+			étageDestination = niveauDuSol;
+			while (étageDestination == niveauDuSol) {
+			int auPif = randomGenerator.intSuivant(nbEtages);
+			étageDestination = immeuble.étage(auPif + immeuble.étageLePlusBas().numéro() - 1);
+			}
+		} else {
+			étageDestination = niveauDuSol;
+		}
     }
 
     private static int compteurGlobalDeCreationDesPassagers = 0;
@@ -55,20 +55,19 @@ public class Passager {
     private static final PressRandomNumberGenerator randomGenerator = new PressRandomNumberGenerator(34);
 
     public char sens () {
-	return (étageDestination.numéro() > étageDépart.numéro() ? '^' : 'v');
+		return (étageDestination.numéro() > étageDépart.numéro() ? '^' : 'v');
     }
 
     public void afficheDans(StringBuilder buffer) {
-	int depa = étageDépart.numéro();
-	int dest = étageDestination.numéro();
-	buffer.append('#');
-	buffer.append(numéroDeCréation);
-	buffer.append(':');
-	buffer.append(depa);
-	buffer.append(dest > depa ? '^' : 'v');
-	buffer.append(dest);
-	buffer.append(':');
-	buffer.append(dateDépart);
+		int depa = étageDépart.numéro();
+		int dest = étageDestination.numéro();
+		buffer.append('#');
+		buffer.append(numéroDeCréation);
+		buffer.append(':');
+		buffer.append(depa);
+		buffer.append(dest > depa ? '^' : 'v');
+		buffer.append(dest);
+		buffer.append(':');
+		buffer.append(dateDépart);
     }
-    
 }

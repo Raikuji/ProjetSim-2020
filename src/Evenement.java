@@ -6,7 +6,7 @@ public abstract class Evenement extends Global {
     protected long date; // en dixième de secondes
     
     public Evenement(long d) {
-	assert d >= 0;
+	    assert d >= 0;
         date = d;
     }
     

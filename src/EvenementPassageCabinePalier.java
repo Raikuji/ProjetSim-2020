@@ -7,21 +7,21 @@ public class EvenementPassageCabinePalier extends Evenement {
     private Etage étage;
     
     public EvenementPassageCabinePalier(long d, Etage e) {
-	super(d);
-	étage = e;
+		super(d);
+		étage = e;
     }
     
     public void afficheDetails(StringBuilder buffer, Immeuble immeuble) {
-	buffer.append("PCP ");
-	buffer.append(étage.numéro());
+		buffer.append("PCP ");
+		buffer.append(étage.numéro());
     }
     
     public void traiter(Immeuble immeuble, Echeancier echeancier) {
-	Cabine cabine = immeuble.cabine;
-	assert ! cabine.porteOuverte;
-	assert étage.numéro() != cabine.étage.numéro();
+		Cabine cabine = immeuble.cabine;
+		assert ! cabine.porteOuverte;
+		assert étage.numéro() != cabine.étage.numéro();
 
-	notYetImplemented();
+		notYetImplemented();
 
-    }
+	}
 }

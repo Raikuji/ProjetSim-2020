@@ -4,20 +4,20 @@ public class EvenementOuverturePorteCabine extends Evenement {
     */
 
     public EvenementOuverturePorteCabine(long d) {
-	super(d);
+	    super(d);
     }
 
     public void afficheDetails(StringBuilder buffer, Immeuble immeuble) {
-	buffer.append("OPC");
+	    buffer.append("OPC");
     }
 
     public void traiter(Immeuble immeuble, Echeancier echeancier) {
-	Cabine cabine = immeuble.cabine;
-	Etage étage = cabine.étage;
+        Cabine cabine = immeuble.cabine;
+        Etage étage = cabine.étage;
 
-	notYetImplemented();
-	
-	assert cabine.porteOuverte;
+        notYetImplemented();
+
+        assert cabine.porteOuverte;
     }
 
 }

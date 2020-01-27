@@ -79,23 +79,23 @@ public class Main extends Global {
     }
 
     private static BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
-    
+
     private static String readLine() {
-	String result = null;
-	try {
-            result = input.readLine();
-        } catch (Exception e) {
-        }
-	return result;
+        String result = null;
+        try {
+                result = input.readLine();
+            } catch (Exception e) {
+            }
+    return result;
     }
 
     private static int parseInt(String réponse) {
-	int result = 1;
-	try {
-	    result = Integer.parseInt(réponse);
-	} catch (Exception e) {
-	}
-	return result;
+        int result = 1;
+        try {
+            result = Integer.parseInt(réponse);
+        } catch (Exception e) {
+        }
+        return result;
     }
 
     private static StringBuilder buffer = new StringBuilder(1024);
