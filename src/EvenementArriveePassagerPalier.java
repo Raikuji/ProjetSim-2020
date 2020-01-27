@@ -19,8 +19,6 @@ public class EvenementArriveePassagerPalier extends Evenement {
 		assert étage != null;
 		assert immeuble.étage(étage.numéro()) == étage;
 		Passager p = new Passager(date, étage, immeuble);
-
-		notYetImplemented();
-	
+		étage.ajouter(p);
     }
 }
