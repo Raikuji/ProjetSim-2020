@@ -43,8 +43,8 @@ public class Immeuble extends Global {
             if (n != 0) {
                 fa = fa * (tableauDesEtages.length - 1);
             }
-	    e = new Etage(n, fa, this);
-	    tableauDesEtages[i] = e;
+            e = new Etage(n, fa, this);
+            tableauDesEtages[i] = e;
             if (n == 0) {
                 niveauDuSol = e;
             }

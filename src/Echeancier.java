@@ -9,21 +9,21 @@ public class Echeancier extends Global {
      */
 
     public Echeancier() {
-	listeEvenements = new LinkedList<Evenement>();
+		listeEvenements = new LinkedList<Evenement>();
     }
 
     public boolean estVide() {
-	return listeEvenements.isEmpty();
+		return listeEvenements.isEmpty();
     }
 
     public void ajouter(Evenement e) {
 		int pos = 0;
 		while (pos < listeEvenements.size()) {
 			if (listeEvenements.get(pos).date >= e.date) {
-			listeEvenements.add(pos, e);
-			return;
+				listeEvenements.add(pos, e);
+				return;
 			} else {
-			pos++;
+				pos++;
 			}
 		}
 		listeEvenements.add(pos, e);

@@ -40,22 +40,22 @@ public class Main extends Global {
         // Boucle principale du simulateur:
         while ( ! échéancier.estVide() ) {
             if (loop == 1) {
-		buffer.setLength(0);
-		buffer.append("----- Etat actuel du simulateur (nombre total de pas = ");
-		buffer.append(nbPasSimul);
-		buffer.append( assertFlag ? ", assert on " : ", assert OFF ");
+                buffer.setLength(0);
+                buffer.append("----- Etat actuel du simulateur (nombre total de pas = ");
+                buffer.append(nbPasSimul);
+                buffer.append( assertFlag ? ", assert on " : ", assert OFF ");
                 buffer.append(") -----");
-		System.out.println(buffer);
+		        System.out.println(buffer);
                 immeuble.affiche(buffer);
                 échéancier.affiche(buffer,immeuble);
                 System.out.println("Taper \"Enter\", ou le nombre de pas, ou q pour quitter:");
-		String réponse = readLine();
-		if ( réponse.equals("q") ) {
-		    return;
-		} else if (réponse.equals("s")) { // Stop / Secret
-		    échéancier.supprimeAPPs();
-		};
-		loop = parseInt(réponse);
+		        String réponse = readLine();
+                if ( réponse.equals("q") ) {
+                    return;
+                } else if (réponse.equals("s")) { // Stop / Secret
+                    échéancier.supprimeAPPs();
+                };
+                loop = parseInt(réponse);
             } else {
                 loop--;
             }

@@ -42,8 +42,8 @@ public class Passager {
 		if (étageDépart == niveauDuSol) {
 			étageDestination = niveauDuSol;
 			while (étageDestination == niveauDuSol) {
-			int auPif = randomGenerator.intSuivant(nbEtages);
-			étageDestination = immeuble.étage(auPif + immeuble.étageLePlusBas().numéro() - 1);
+				int auPif = randomGenerator.intSuivant(nbEtages);
+				étageDestination = immeuble.étage(auPif + immeuble.étageLePlusBas().numéro() - 1);
 			}
 		} else {
 			étageDestination = niveauDuSol;

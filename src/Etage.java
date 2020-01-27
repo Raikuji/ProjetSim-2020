@@ -93,7 +93,7 @@ public class Etage extends Global {
     }
 
     public long arrivéeSuivante() {
-	return poissonFrequenceArrivee.suivant();
+		return poissonFrequenceArrivee.suivant();
     }
 
     public boolean aDesPassagersQuiMontent(){
