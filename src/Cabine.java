@@ -75,14 +75,15 @@ public class Cabine extends Global {
 		assert p != null;
 		assert ! transporte(p);
 		if (modeParfait) {
-			if (intention != p.sens() || intention == '-') {
+			if (intention != p.sens() && intention != '-') {
 			return false;
 			}
 		}
 		for (int i=0 ; i<tableauPassager.length ; i++) {
 			if(tableauPassager[i]==null){
-			tableauPassager[i]=p;
-			return true;
+				tableauPassager[i]=p;
+				étage.supprimer(p);
+				return true;
 			}
 		}
 		return false;
