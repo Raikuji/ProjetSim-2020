@@ -58,7 +58,6 @@ public class Immeuble extends Global {
         e = étageLePlusHaut();
         cabine = new Cabine(niveauDuSol());
         e = étage(e.numéro() - 1);
-        echeancier.ajouter(new EvenementFermeturePorteCabine(48));
     }
 
     public void affiche(StringBuilder buffer) {
