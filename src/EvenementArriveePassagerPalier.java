@@ -25,6 +25,7 @@ public class EvenementArriveePassagerPalier extends Evenement {
 		echeancier.ajouter(new EvenementArriveePassagerPalier(date + étage.arrivéeSuivante(), étage));
 		if((étage == immeuble.cabine.étage) && immeuble.cabine.porteOuverte && (immeuble.cabine.nbPassager() <= nombreDePlacesDansLaCabine)) {
 			immeuble.cabine.faireMonterPassager(p);
+			immeuble.cabine.changerIntention(p.sens());
 			echeancier.ajouter(new EvenementFermeturePorteCabine(date + 4));
 			echeancier.decalerFPC();
 		}
