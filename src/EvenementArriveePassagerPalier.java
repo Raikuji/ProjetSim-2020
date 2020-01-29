@@ -22,6 +22,7 @@ public class EvenementArriveePassagerPalier extends Evenement {
 		assert immeuble.étage(étage.numéro()) == étage;
 		Passager p = new Passager(date, étage, immeuble);
 		étage.ajouter(p);
+		echeancier.ajouter(new EvenementArriveePassagerPalier(date + étage.arrivéeSuivante(), étage));
 		if((étage == immeuble.cabine.étage) && immeuble.cabine.porteOuverte && (immeuble.cabine.nbPassager() <= nombreDePlacesDansLaCabine)) {
 			immeuble.cabine.faireMonterPassager(p);
 			echeancier.ajouter(new EvenementFermeturePorteCabine(date + 4));
