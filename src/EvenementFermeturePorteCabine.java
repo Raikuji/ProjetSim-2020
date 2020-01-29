@@ -18,10 +18,12 @@ public class EvenementFermeturePorteCabine extends Evenement {
         Cabine cabine = immeuble.cabine;
         assert cabine.porteOuverte;
         cabine.porteOuverte = false;
+        if (cabine.intention() == '^') {
+            echeancier.ajouter(new EvenementPassageCabinePalier(date + tempsPourBougerLaCabineDUnEtage, immeuble.étage(cabine.étage.numéro() + 1)));
+        } else {
+            echeancier.ajouter(new EvenementPassageCabinePalier(date + tempsPourBougerLaCabineDUnEtage, immeuble.étage(cabine.étage.numéro() - 1)));
 
-        notYetImplemented();
-
-        assert ! cabine.porteOuverte;
+        }
     }
 
 
