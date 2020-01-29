@@ -23,6 +23,16 @@ public class Cabine extends Global {
 		intention = '-';
     }
 
+    public int nbPassager() {
+    	int nb = 0;
+    	for(int i = 0; i < tableauPassager.length; i++) {
+    		if(tableauPassager[i] != null) {
+    			nb ++;
+			}
+		}
+    	return nb;
+	}
+
     public void afficheDans(StringBuilder buffer) {
 		buffer.append("Contenu de la cabine: ");
 		for (Passager p: tableauPassager) {
