@@ -75,7 +75,7 @@ public class Cabine extends Global {
 		assert p != null;
 		assert ! transporte(p);
 		if (modeParfait) {
-			if (intention != p.sens()) {
+			if (intention != p.sens() || intention == '-') {
 			return false;
 			}
 		}

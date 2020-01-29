@@ -7,7 +7,7 @@ public class EvenementFermeturePorteCabine extends Evenement {
     */
 
     public EvenementFermeturePorteCabine(long d) {
-	super(d);
+	    super(d);
     }
 
     public void afficheDetails(StringBuilder buffer, Immeuble immeuble) {
