@@ -15,7 +15,7 @@ public class EvenementPassageCabinePalier extends Evenement {
 		buffer.append("PCP ");
 		buffer.append(étage.numéro());
     }
-    
+
     public void traiter(Immeuble immeuble, Echeancier echeancier) {
 		Cabine cabine = immeuble.cabine;
 		assert ! cabine.porteOuverte;
@@ -23,16 +23,20 @@ public class EvenementPassageCabinePalier extends Evenement {
 
 		long dureeChangement = this.date + this.tempsPourBougerLaCabineDUnEtage;
 
-		if (immeuble.cabine.intention() == '^') {
-			Etage e = immeuble.étage(étage.numéro() + 1);
-			immeuble.cabine.étage = this.étage;
-			this.étage = e;
-		} if (immeuble.cabine.intention() == 'v') {
-			Etage e = immeuble.étage(étage.numéro() - 1);
-			this.étage = e;
-			immeuble.cabine.étage = e;
+		if(immeuble.cabine.passagersVeulentDescendre()) {
+			echeancier.ajouter(new EvenementOuverturePorteCabine(dureeChangement));
+		} else {
+			if (immeuble.cabine.intention() == '^') {
+				Etage e = immeuble.étage(étage.numéro() + 1);
+				immeuble.cabine.étage = this.étage;
+				this.étage = e;
+			} if (immeuble.cabine.intention() == 'v') {
+				Etage e = immeuble.étage(étage.numéro() - 1);
+				this.étage = e;
+				immeuble.cabine.étage = e;
+			}
+			this.date = dureeChangement;
+			echeancier.ajouter(this);
 		}
-		this.date = dureeChangement;
-		echeancier.ajouter(this);
 	}
 }
