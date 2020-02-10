@@ -17,11 +17,23 @@ public class EvenementPassageCabinePalier extends Evenement {
     }
     
     public void traiter(Immeuble immeuble, Echeancier echeancier) {
+		System.out.println("LA");
 		Cabine cabine = immeuble.cabine;
 		assert ! cabine.porteOuverte;
 		assert étage.numéro() != cabine.étage.numéro();
 
-		notYetImplemented();
+		long dureeChangement = this.date + this.tempsPourBougerLaCabineDUnEtage;
 
+		if (immeuble.cabine.intention() == '^') {
+			Etage e = immeuble.étage(étage.numéro() + 1);
+			immeuble.cabine.étage = this.étage;
+			this.étage = e;
+		} if (immeuble.cabine.intention() == 'v') {
+			Etage e = immeuble.étage(étage.numéro() - 1);
+			this.étage = e;
+			immeuble.cabine.étage = e;
+		}
+		this.date = dureeChangement;
+		echeancier.ajouter(this);
 	}
 }
