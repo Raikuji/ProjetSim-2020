@@ -21,21 +21,19 @@ public class EvenementPassageCabinePalier extends Evenement {
 		assert ! cabine.porteOuverte;
 		assert étage.numéro() != cabine.étage.numéro();
 
-		long dureeChangement = this.date + this.tempsPourBougerLaCabineDUnEtage;
-
+		if (immeuble.cabine.intention() == '^') {
+			Etage e = immeuble.étage(étage.numéro() + 1);
+			immeuble.cabine.étage = this.étage;
+			this.étage = e;
+		} if (immeuble.cabine.intention() == 'v') {
+			Etage e = immeuble.étage(étage.numéro() - 1);
+			immeuble.cabine.étage = this.étage;
+			this.étage = e;
+		}
 		if(immeuble.cabine.passagersVeulentDescendre()) {
-			echeancier.ajouter(new EvenementOuverturePorteCabine(dureeChangement));
+			echeancier.ajouter(new EvenementOuverturePorteCabine(this.date + tempsPourOuvrirOuFermerLesPortes));
 		} else {
-			if (immeuble.cabine.intention() == '^') {
-				Etage e = immeuble.étage(étage.numéro() + 1);
-				immeuble.cabine.étage = this.étage;
-				this.étage = e;
-			} if (immeuble.cabine.intention() == 'v') {
-				Etage e = immeuble.étage(étage.numéro() - 1);
-				this.étage = e;
-				immeuble.cabine.étage = e;
-			}
-			this.date = dureeChangement;
+			this.date = this.date + this.tempsPourBougerLaCabineDUnEtage;
 			echeancier.ajouter(this);
 		}
 	}
