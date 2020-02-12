@@ -35,7 +35,7 @@ public class EvenementArriveePassagerPalier extends Evenement {
 			} else {
 				immeuble.cabine.changerIntention('^');
 			}
-			echeancier.ajouter(new EvenementFermeturePorteCabine(date + Global.tempsPourEntrerOuSortirDeLaCabine));
+			echeancier.ajouter(new EvenementFermeturePorteCabine(date + Global.tempsPourOuvrirOuFermerLesPortes));
 		}
     }
 }
