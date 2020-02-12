@@ -70,4 +70,8 @@ public class Passager {
 		buffer.append(':');
 		buffer.append(dateDépart);
     }
+
+    public long numPassager() {
+    	return numéroDeCréation;
+	}
 }

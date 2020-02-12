@@ -29,7 +29,7 @@ public class EvenementArriveePassagerPalier extends Evenement {
 			echeancier.ajouter(new EvenementFermeturePorteCabine(date + Global.tempsPourEntrerOuSortirDeLaCabine));
 			echeancier.decalerFPC();
 		} else if ((étage != immeuble.cabine.étage) && immeuble.cabine.intention() == '-') {
-			echeancier.ajouter((new EvenementPietonArrivePalier(this.date + Global.délaiDePatienceAvantSportif)));
+			echeancier.ajouter((new EvenementPietonArrivePalier(this.date + Global.délaiDePatienceAvantSportif, p.étageDépart().numéro(), p)));
 			if(étage.numéro() < immeuble.cabine.étage.numéro()) {
 				immeuble.cabine.changerIntention('v');
 			} else {

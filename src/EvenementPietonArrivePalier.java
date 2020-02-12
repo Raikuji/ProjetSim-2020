@@ -4,18 +4,25 @@ public class EvenementPietonArrivePalier extends Evenement {
        Classe à faire complètement par vos soins.
     */
 
+    private int etageDepart;
+    private Passager p;
+
     public void afficheDetails(StringBuilder buffer, Immeuble immeuble) {
-	    notYetImplemented();
+	    buffer.append("PAP ");
+	    buffer.append(etageDepart);
+	    buffer.append(" #");
+	    buffer.append(p.numPassager());
     }
 
     public void traiter(Immeuble immeuble, Echeancier echeancier) {
 	    notYetImplemented();
     }
 
-    public EvenementPietonArrivePalier(long d) {
+    public EvenementPietonArrivePalier(long d, int ed, Passager p) {
         // Signature approximative et temporaire... juste pour que cela compile.
         super(d);
-        notYetImplemented();
+        etageDepart = ed;
+        this.p = p;
     }
     
 }
