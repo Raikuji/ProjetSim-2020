@@ -21,20 +21,26 @@ public class EvenementPassageCabinePalier extends Evenement {
 		assert ! cabine.porteOuverte;
 		assert étage.numéro() != cabine.étage.numéro();
 
-		if (immeuble.cabine.intention() == '^') {
-			Etage e = immeuble.étage(étage.numéro() + 1);
-			immeuble.cabine.étage = this.étage;
-			this.étage = e;
-		} if (immeuble.cabine.intention() == 'v') {
-			Etage e = immeuble.étage(étage.numéro() - 1);
-			immeuble.cabine.étage = this.étage;
-			this.étage = e;
-		}
-		if(immeuble.cabine.passagersVeulentDescendre()) {
-			echeancier.ajouter(new EvenementOuverturePorteCabine(this.date + tempsPourOuvrirOuFermerLesPortes));
+		if (cabine.étage.numéro() == étage.numéro()) {
+			echeancier.ajouter(new EvenementOuverturePorteCabine(this.date + Global.tempsPourOuvrirOuFermerLesPortes));
 		} else {
-			this.date = this.date + Global.tempsPourBougerLaCabineDUnEtage;
-			echeancier.ajouter(this);
+			if (immeuble.cabine.intention() == '^') {
+				Etage e = immeuble.étage(étage.numéro() + 1);
+				immeuble.cabine.étage = this.étage;
+				this.étage = e;
+			} if (immeuble.cabine.intention() == 'v') {
+				Etage e = immeuble.étage(étage.numéro() - 1);
+				immeuble.cabine.étage = this.étage;
+				this.étage = e;
+			}
+			if(immeuble.cabine.passagersVeulentDescendre()) {
+				echeancier.ajouter(new EvenementOuverturePorteCabine(this.date + tempsPourOuvrirOuFermerLesPortes));
+			} else {
+				this.date = this.date + Global.tempsPourBougerLaCabineDUnEtage;
+				echeancier.ajouter(this);
+			}
 		}
+
+
 	}
 }
