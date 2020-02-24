@@ -28,7 +28,7 @@ public class EvenementArriveePassagerPalier extends Evenement {
 			immeuble.cabine.changerIntention(p.sens());
 			echeancier.ajouter(new EvenementFermeturePorteCabine(date + Global.tempsPourEntrerOuSortirDeLaCabine));
 			echeancier.decalerFPC();
-		} else if ((étage != immeuble.cabine.étage) && immeuble.cabine.intention() == '-') {
+		} else {
 			echeancier.ajouter((new EvenementPietonArrivePalier(this.date + Global.délaiDePatienceAvantSportif, p.étageDépart().numéro(), p)));
 			if(étage.numéro() < immeuble.cabine.étage.numéro()) {
 				immeuble.cabine.changerIntention('v');
