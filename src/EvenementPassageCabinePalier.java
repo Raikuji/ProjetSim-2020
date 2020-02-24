@@ -20,27 +20,39 @@ public class EvenementPassageCabinePalier extends Evenement {
 		Cabine cabine = immeuble.cabine;
 		assert ! cabine.porteOuverte;
 		assert étage.numéro() != cabine.étage.numéro();
+		assert cabine.intention() != '-';
+		boolean ouvrePorte = false;
 
-		if (cabine.étage.aDesPassagers()) {
-			echeancier.ajouter(new EvenementOuverturePorteCabine(this.date + Global.tempsPourOuvrirOuFermerLesPortes));
-		} else {
-			if (immeuble.cabine.intention() == '^') {
+		if (immeuble.cabine.intention() == '^') {
+			if (immeuble.étage(cabine.étage.numéro() + 1).aDesPassagers()) {
+				echeancier.ajouter(new EvenementOuverturePorteCabine(this.date + Global.tempsPourOuvrirOuFermerLesPortes));
+				//Etage e = immeuble.étage(étage.numéro() + 1);
+				immeuble.cabine.étage = this.étage;
+				ouvrePorte = true;
+				//this.étage = e;
+			} else {
 				Etage e = immeuble.étage(étage.numéro() + 1);
 				immeuble.cabine.étage = this.étage;
 				this.étage = e;
-			} if (immeuble.cabine.intention() == 'v') {
+			}
+		} if (immeuble.cabine.intention() == 'v') {
+			if (immeuble.étage(cabine.étage.numéro() - 1).aDesPassagers()) {
+				echeancier.ajouter(new EvenementOuverturePorteCabine(this.date + Global.tempsPourOuvrirOuFermerLesPortes));
+				//Etage e = immeuble.étage(étage.numéro() - 1);
+				immeuble.cabine.étage = this.étage;
+				ouvrePorte = true;
+				//this.étage = e;
+			} else {
 				Etage e = immeuble.étage(étage.numéro() - 1);
 				immeuble.cabine.étage = this.étage;
 				this.étage = e;
 			}
-			if(immeuble.cabine.passagersVeulentDescendre()) {
-				echeancier.ajouter(new EvenementOuverturePorteCabine(this.date + tempsPourOuvrirOuFermerLesPortes));
-			} else {
-				this.date = this.date + Global.tempsPourBougerLaCabineDUnEtage;
-				echeancier.ajouter(this);
-			}
 		}
-
-
+		if(immeuble.cabine.passagersVeulentDescendre()) {
+			echeancier.ajouter(new EvenementOuverturePorteCabine(this.date + tempsPourOuvrirOuFermerLesPortes));
+		} else if(!ouvrePorte) {
+			this.date = this.date + Global.tempsPourBougerLaCabineDUnEtage;
+			echeancier.ajouter(this);
+		}
 	}
 }
