@@ -23,6 +23,14 @@ public class EvenementOuverturePorteCabine extends Evenement {
             cabine.changerIntention('-');
         }
         assert cabine.porteOuverte;
+
+        if(cabine.étage.aDesPassagers()) {
+            Passager p = cabine.étage.getPassager().get(0);
+            immeuble.cabine.faireMonterPassager(p);
+            immeuble.cabine.changerIntention(p.sens());
+            echeancier.ajouter(new EvenementFermeturePorteCabine(date + Global.tempsPourEntrerOuSortirDeLaCabine));
+            echeancier.decalerFPC();
+        }
     }
 
 }

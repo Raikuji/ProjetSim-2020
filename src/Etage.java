@@ -123,4 +123,8 @@ public class Etage extends Global {
 		return (!passagers.isEmpty());
     }
 
+    public ArrayList<Passager> getPassager() {
+    	return passagers;
+	}
+
 }
