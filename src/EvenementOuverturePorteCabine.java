@@ -30,6 +30,7 @@ public class EvenementOuverturePorteCabine extends Evenement {
             immeuble.cabine.changerIntention(p.sens());
             echeancier.ajouter(new EvenementFermeturePorteCabine(date + Global.tempsPourEntrerOuSortirDeLaCabine));
             echeancier.decalerFPC();
+            echeancier.supprimePAP(p);
         }
     }
 
