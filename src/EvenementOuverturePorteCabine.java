@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class EvenementOuverturePorteCabine extends Evenement {
     /* OPC: Ouverture Porte Cabine
        L'instant précis ou la porte termine de s'ouvrir.
@@ -14,6 +16,7 @@ public class EvenementOuverturePorteCabine extends Evenement {
     public void traiter(Immeuble immeuble, Echeancier echeancier) {
         Cabine cabine = immeuble.cabine;
         Etage étage = cabine.étage;
+        ArrayList<Passager> passagers = cabine.étage.getPassagers();
 
         cabine.porteOuverte = true;
 
@@ -26,21 +29,22 @@ public class EvenementOuverturePorteCabine extends Evenement {
         assert cabine.porteOuverte;
 
         if(cabine.étage.aDesPassagers()) {
-            Passager p = cabine.étage.getPassager().get(0);
+            Passager p = cabine.étage.getPassagers().get(0);
             nbPassagerM ++;
             cabine.faireMonterPassager(p);
             cabine.changerIntention(p.sens());
             if(modeParfait) {
-                for (Passager v: cabine.étage.getPassager()) {
+                for (Passager v: cabine.étage.getPassagers()) {
                     if(v.sens() == p.sens() && cabine.nbPassager() <= nombreDePlacesDansLaCabine) {
                         cabine.faireMonterPassager(v);
                         nbPassagerM ++;
                     }
                 }
             } else {
-                for (Passager v: cabine.étage.getPassager()) {
+                for(int i = 0; i <passagers.size(); i++) {
                     if(cabine.nbPassager() <= nombreDePlacesDansLaCabine) {
-                        cabine.faireMonterPassager(v);
+                        echeancier.supprimePAP(passagers.get(i));
+                        cabine.faireMonterPassager(passagers.get(i));
                         nbPassagerM ++;
                     }
                 }
