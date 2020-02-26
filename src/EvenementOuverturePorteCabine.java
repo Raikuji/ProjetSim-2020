@@ -17,7 +17,8 @@ public class EvenementOuverturePorteCabine extends Evenement {
 
         cabine.porteOuverte = true;
 
-        int nbPassager = cabine.faireDescendrePassagers(immeuble, date);
+        int nbPassagerD = cabine.faireDescendrePassagers(immeuble, date);
+        int nbPassagerM = 0;
 
         if(cabine.nbPassager() == 0) {
             cabine.changerIntention('-');
@@ -26,16 +27,32 @@ public class EvenementOuverturePorteCabine extends Evenement {
 
         if(cabine.étage.aDesPassagers()) {
             Passager p = cabine.étage.getPassager().get(0);
-            immeuble.cabine.faireMonterPassager(p);
-            immeuble.cabine.changerIntention(p.sens());
-            echeancier.ajouter(new EvenementFermeturePorteCabine(date + Global.tempsPourEntrerOuSortirDeLaCabine));
-            echeancier.decalerFPC();
+            nbPassagerM ++;
+            cabine.faireMonterPassager(p);
+            cabine.changerIntention(p.sens());
+            if(modeParfait) {
+                for (Passager v: cabine.étage.getPassager()) {
+                    if(v.sens() == p.sens() && cabine.nbPassager() <= nombreDePlacesDansLaCabine) {
+                        cabine.faireMonterPassager(v);
+                        nbPassagerM ++;
+                    }
+                }
+            } else {
+                for (Passager v: cabine.étage.getPassager()) {
+                    if(cabine.nbPassager() <= nombreDePlacesDansLaCabine) {
+                        cabine.faireMonterPassager(v);
+                        nbPassagerM ++;
+                    }
+                }
+            }
             echeancier.supprimePAP(p);
         }
 
         if(immeuble.passagerEnDessous(cabine.étage)) {
             cabine.changerIntention('v');
-            echeancier.ajouter((new EvenementFermeturePorteCabine(date + nbPassager * tempsPourEntrerOuSortirDeLaCabine)));
+        }
+        if(cabine.intention() != '-') {
+            echeancier.ajouter(new EvenementFermeturePorteCabine(date + Global.tempsPourEntrerOuSortirDeLaCabine * (nbPassagerM + nbPassagerD)));
             echeancier.decalerFPC();
         }
     }
