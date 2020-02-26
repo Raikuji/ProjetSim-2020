@@ -15,6 +15,10 @@ public class Cabine extends Global {
        Quand on cherche une place libre, on fait le parcours de la gauche vers la droite.
     */
 
+    public Passager[] getPassager() {
+    	return tableauPassager;
+	}
+
     public Cabine(Etage e) {
 		assert e != null;
 		étage = e;
