@@ -17,7 +17,7 @@ public class EvenementOuverturePorteCabine extends Evenement {
 
         cabine.porteOuverte = true;
 
-        cabine.faireDescendrePassagers(immeuble, date);
+        int nbPassager = cabine.faireDescendrePassagers(immeuble, date);
 
         if(cabine.nbPassager() == 0) {
             cabine.changerIntention('-');
@@ -31,6 +31,12 @@ public class EvenementOuverturePorteCabine extends Evenement {
             echeancier.ajouter(new EvenementFermeturePorteCabine(date + Global.tempsPourEntrerOuSortirDeLaCabine));
             echeancier.decalerFPC();
             echeancier.supprimePAP(p);
+        }
+
+        if(immeuble.passagerEnDessous(cabine.étage)) {
+            cabine.changerIntention('v');
+            echeancier.ajouter((new EvenementFermeturePorteCabine(date + nbPassager * tempsPourEntrerOuSortirDeLaCabine)));
+            echeancier.decalerFPC();
         }
     }
 

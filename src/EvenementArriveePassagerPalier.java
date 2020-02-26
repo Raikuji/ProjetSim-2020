@@ -30,13 +30,16 @@ public class EvenementArriveePassagerPalier extends Evenement {
 			echeancier.decalerFPC();
 		} else if (!immeuble.cabine.porteOuverte) {
 			echeancier.ajouter((new EvenementPietonArrivePalier(this.date + Global.délaiDePatienceAvantSportif, p.étageDépart().numéro(), p)));
-		} else {
+		} else if(immeuble.cabine.intention() == '-') {
 			echeancier.ajouter((new EvenementPietonArrivePalier(this.date + Global.délaiDePatienceAvantSportif, p.étageDépart().numéro(), p)));
 			if(étage.numéro() < immeuble.cabine.étage.numéro()) {
 				immeuble.cabine.changerIntention('v');
 			} else {
 				immeuble.cabine.changerIntention('^');
 			}
-			echeancier.ajouter(new EvenementFermeturePorteCabine(date + Global.tempsPourOuvrirOuFermerLesPortes));		}
+			echeancier.ajouter(new EvenementFermeturePorteCabine(date + Global.tempsPourOuvrirOuFermerLesPortes));
+		} else {
+			echeancier.ajouter((new EvenementPietonArrivePalier(this.date + Global.délaiDePatienceAvantSportif, p.étageDépart().numéro(), p)));
+		}
     }
 }

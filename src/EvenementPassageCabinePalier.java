@@ -31,7 +31,12 @@ public class EvenementPassageCabinePalier extends Evenement {
 				ouvrePorte = true;
 				//this.étage = e;
 			} else {
-				Etage e = immeuble.étage(étage.numéro() + 1);
+				Etage e;
+				if(étage.numéro() + 1 <= 7) {
+					e = immeuble.étage(étage.numéro() + 1);
+				} else {
+					e = immeuble.étage(étage.numéro());
+				}
 				immeuble.cabine.étage = this.étage;
 				this.étage = e;
 			}
