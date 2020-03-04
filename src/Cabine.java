@@ -80,7 +80,7 @@ public class Cabine extends Global {
 		assert ! transporte(p);
 		if (modeParfait) {
 			if (intention != p.sens() && intention != '-') {
-			return false;
+				return false;
 			}
 		}
 		for (int i=0 ; i<tableauPassager.length ; i++) {
