@@ -127,4 +127,6 @@ public class Etage extends Global {
     	return passagers;
 	}
 
+	public ArrayList<Passager> getPietons() {return pietons;}
+
 }
