@@ -29,16 +29,29 @@ public class EvenementOuverturePorteCabine extends Evenement {
 
         if (cabine.étage.aDesPassagers()) {
             if (modeParfait) {
+                boolean memeSens = false;
                 for (int i = 0; i < passagers.size(); i++) {
-                    if (passagers.get(i).sens() == cabine.intention() && cabine.nbPassager() <= nombreDePlacesDansLaCabine) {
+                    if(passagers.get(i).sens() == cabine.intention()) memeSens = true;
+                }
+                for (int i = 0; i < passagers.size(); i++) {
+                    if(passagers.get(i).sens() == cabine.intention() && cabine.nbPassager() <= nombreDePlacesDansLaCabine) {
                         echeancier.supprimePAP(passagers.get(i));
                         cabine.faireMonterPassager(passagers.get(i));
                         nbPassagerM++;
                     } else if (cabine.nbPassager() == 0) {
-                        echeancier.supprimePAP(passagers.get(i));
-                        cabine.changerIntention(passagers.get(i).sens());
-                        cabine.faireMonterPassager(passagers.get(i));
-                        nbPassagerM++;
+                        if(memeSens) {
+                            if(passagers.get(i).sens() == cabine.intention()) {
+                                echeancier.supprimePAP(passagers.get(i));
+                                cabine.changerIntention(passagers.get(i).sens());
+                                cabine.faireMonterPassager(passagers.get(i));
+                                nbPassagerM++;
+                            }
+                        } else {
+                            echeancier.supprimePAP(passagers.get(i));
+                            cabine.changerIntention(passagers.get(i).sens());
+                            cabine.faireMonterPassager(passagers.get(i));
+                            nbPassagerM++;
+                        }
                     }
                 }
             } else {

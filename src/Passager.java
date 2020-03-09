@@ -32,6 +32,10 @@ public class Passager {
 		return this.étageDestination.numéro();
     }
 
+    public int etageAParcourir() {
+    	return Math.abs(numéroDepart() - numéroDestination());
+	}
+
     public Passager(long dateDeDepart, Etage etageDeDepart, Immeuble immeuble) {
 		Etage niveauDuSol = immeuble.niveauDuSol();
 		int nbEtages = immeuble.nbEtages();
