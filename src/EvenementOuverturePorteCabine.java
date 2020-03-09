@@ -31,9 +31,11 @@ public class EvenementOuverturePorteCabine extends Evenement {
             if(modeParfait) {
                 for(int i = 0; i <passagers.size(); i++) {
                     if(passagers.get(i).sens() == cabine.intention() && cabine.nbPassager() <= nombreDePlacesDansLaCabine) {
+                        echeancier.supprimePAP(passagers.get(i));
                         cabine.faireMonterPassager(passagers.get(i));
                         nbPassagerM ++;
                     } else if(cabine.nbPassager() == 0) {
+                        echeancier.supprimePAP(passagers.get(i));
                         cabine.changerIntention(passagers.get(i).sens());
                         cabine.faireMonterPassager(passagers.get(i));
                         nbPassagerM ++;
