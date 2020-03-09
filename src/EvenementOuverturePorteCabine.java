@@ -33,8 +33,10 @@ public class EvenementOuverturePorteCabine extends Evenement {
                     if(passagers.get(i).sens() == cabine.intention() && cabine.nbPassager() <= nombreDePlacesDansLaCabine) {
                         cabine.faireMonterPassager(passagers.get(i));
                         nbPassagerM ++;
-                    } else {
-                        notYetImplemented();
+                    } else if(cabine.nbPassager() == 0) {
+                        cabine.changerIntention(passagers.get(i).sens());
+                        cabine.faireMonterPassager(passagers.get(i));
+                        nbPassagerM ++;
                     }
                 }
             } else {
