@@ -35,6 +35,15 @@ public class Echeancier extends Global {
 		return e;
     }
 
+    public boolean hasFPC() {
+		for (Evenement event : listeEvenements) {
+			if(event instanceof EvenementFermeturePorteCabine) {
+				return true;
+			}
+		}
+		return false;
+	}
+
     public void affiche(StringBuilder buffer, Immeuble ascenseur) {
 		buffer.setLength(0);
 		buffer.append("Echéancier = ");

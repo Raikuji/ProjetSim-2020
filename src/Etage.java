@@ -97,6 +97,11 @@ public class Etage extends Global {
     	passagers.remove(passager);
 	}
 
+	public void supprimerPieton(Passager passager) {
+    	assert passager != null;
+    	pietons.remove(passager);
+	}
+
     public long arrivéeSuivante() {
 		return poissonFrequenceArrivee.suivant();
     }

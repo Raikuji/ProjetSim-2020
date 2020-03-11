@@ -40,7 +40,7 @@ public class EvenementPassageCabinePalier extends Evenement {
 				immeuble.cabine.étage = this.étage;
 				this.étage = e;
 			}
-		} if (immeuble.cabine.intention() == 'v') {
+		} else if (immeuble.cabine.intention() == 'v') {
 			if (immeuble.étage(cabine.étage.numéro() - 1).aDesPassagers()) {
 				echeancier.ajouter(new EvenementOuverturePorteCabine(this.date + Global.tempsPourOuvrirOuFermerLesPortes));
 				//Etage e = immeuble.étage(étage.numéro() - 1);
@@ -58,7 +58,7 @@ public class EvenementPassageCabinePalier extends Evenement {
 				this.étage = e;
 			}
 		}
-		if(immeuble.cabine.passagersVeulentDescendre()) {
+		if(immeuble.cabine.passagersVeulentDescendre() && !ouvrePorte) {
 			echeancier.ajouter(new EvenementOuverturePorteCabine(this.date + tempsPourOuvrirOuFermerLesPortes));
 		} else if(!ouvrePorte) {
 			this.date = this.date + Global.tempsPourBougerLaCabineDUnEtage;

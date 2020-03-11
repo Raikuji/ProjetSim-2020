@@ -28,34 +28,35 @@ public class EvenementOuverturePorteCabine extends Evenement {
         assert cabine.porteOuverte;
 
         if (cabine.étage.aDesPassagers()) {
+            boolean memeSens = false;
             if (modeParfait) {
-                boolean memeSens = false;
                 for (int i = 0; i < passagers.size(); i++) {
                     if(passagers.get(i).sens() == cabine.intention()) memeSens = true;
                 }
-                for (int i = 0; i < passagers.size(); i++) {
-                    if(passagers.get(i).sens() == cabine.intention() && cabine.nbPassager() <= nombreDePlacesDansLaCabine) {
-                        echeancier.supprimePAP(passagers.get(i));
-                        cabine.faireMonterPassager(passagers.get(i));
+                int nbPassager = passagers.size();
+                int j = 0;
+                for (int i = 0; i < nbPassager; i++) {
+                    if(passagers.get(j).sens() == cabine.intention() && cabine.nbPassager() <= nombreDePlacesDansLaCabine) {
+                        echeancier.supprimePAP(passagers.get(j));
+                        cabine.faireMonterPassager(passagers.get(j));
                         nbPassagerM++;
                     } else if (cabine.nbPassager() == 0) {
                         if(memeSens) {
-                            if(passagers.get(i).sens() == cabine.intention()) {
-                                echeancier.supprimePAP(passagers.get(i));
-                                cabine.changerIntention(passagers.get(i).sens());
-                                cabine.faireMonterPassager(passagers.get(i));
+                            if(passagers.get(j).sens() == cabine.intention()) {
+                                echeancier.supprimePAP(passagers.get(j));
+                                cabine.changerIntention(passagers.get(j).sens());
+                                cabine.faireMonterPassager(passagers.get(j));
                                 nbPassagerM++;
-                            }
-                        } else {
-                            echeancier.supprimePAP(passagers.get(i));
-                            cabine.changerIntention(passagers.get(i).sens());
-                            cabine.faireMonterPassager(passagers.get(i));
+                            } else j++;
+                        } else if(!immeuble.passagerAuDessus(étage) && !immeuble.passagerEnDessous(étage)){
+                            echeancier.supprimePAP(passagers.get(j));
+                            cabine.changerIntention(passagers.get(j).sens());
+                            cabine.faireMonterPassager(passagers.get(j));
                             nbPassagerM++;
                         }
                     }
                 }
             } else {
-                boolean memeSens = false;
                 int nbPass = passagers.size();
                 int nbAvant = cabine.nbPassager();
                 for (int i = 0; i < nbPass; i++) {

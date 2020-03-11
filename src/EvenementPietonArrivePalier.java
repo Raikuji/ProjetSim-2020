@@ -4,38 +4,46 @@ public class EvenementPietonArrivePalier extends Evenement {
        Classe à faire complètement par vos soins.
     */
 
-    private int etageDepart;
+    private int etageEnCours;
     private Passager p;
 
     public void afficheDetails(StringBuilder buffer, Immeuble immeuble) {
 	    buffer.append("PAP ");
-	    buffer.append(etageDepart);
+	    buffer.append(etageEnCours);
 	    buffer.append(" #");
 	    buffer.append(p.numPassager());
     }
 
     public void traiter(Immeuble immeuble, Echeancier echeancier) {
-	    notYetImplemented();
-	    if(p.étageDépart().numéro() == etageDepart) {
+	    if(p.étageDépart().numéro() == etageEnCours && !immeuble.étage(etageEnCours).getPietons().contains(p)) {
 	        p.étageDépart().supprimer(p);
-	        Etage e = immeuble.étage(etageDepart);
+	        Etage e = immeuble.étage(etageEnCours);
 	        e.getPietons().add(p);
-            echeancier.ajouter(new EvenementPietonArrivePalier(tempsPourMonterOuDescendreUnEtageAPieds, etageDepart, p));
-        } else if(p.sens() == '^') {
-            /*p.étageDépart().supprimer(p);
-            Etage e = immeuble.étage(etageDepart);
-            e.getPietons().add(p);*/
-            notYetImplemented();
-        } else if(p.sens() == 'v') {
-            notYetImplemented();
+	        if(p.sens() == '^')
+                echeancier.ajouter(new EvenementPietonArrivePalier(tempsPourMonterOuDescendreUnEtageAPieds + date, etageEnCours + 1, p));
+	        else if(p.sens() == 'v')
+                echeancier.ajouter(new EvenementPietonArrivePalier(tempsPourMonterOuDescendreUnEtageAPieds + date, etageEnCours - 1, p));
+        } else if(p.sens() == '^' && p.étageDestination().numéro() != etageEnCours) {
+            immeuble.étage(etageEnCours - 1).supprimerPieton(p);
+            Etage e = immeuble.étage(etageEnCours);
+            e.getPietons().add(p);
+            echeancier.ajouter(new EvenementPietonArrivePalier(tempsPourMonterOuDescendreUnEtageAPieds + date, etageEnCours + 1, p));
+        } else if(p.sens() == 'v' && p.étageDestination().numéro() != etageEnCours) {
+            immeuble.étage(etageEnCours + 1).supprimerPieton(p);
+            Etage e = immeuble.étage(etageEnCours);
+            e.getPietons().add(p);
+            echeancier.ajouter(new EvenementPietonArrivePalier(tempsPourMonterOuDescendreUnEtageAPieds + date, etageEnCours - 1, p));
+        } else if(p.sens() == '^' && p.étageDestination().numéro() == etageEnCours) {
+            immeuble.étage(etageEnCours - 1).supprimerPieton(p);
+        } else if(p.sens() == 'v' && p.étageDestination().numéro() == etageEnCours) {
+            immeuble.étage(etageEnCours + 1).supprimerPieton(p);
         }
-	    notYetImplemented();
     }
 
-    public EvenementPietonArrivePalier(long d, int ed, Passager p) {
+    public EvenementPietonArrivePalier(long d, int eec, Passager p) {
         // Signature approximative et temporaire... juste pour que cela compile.
         super(d);
-        etageDepart = ed;
+        etageEnCours = eec;
         this.p = p;
     }
 
