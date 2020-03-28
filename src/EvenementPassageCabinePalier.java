@@ -3,6 +3,9 @@ public class EvenementPassageCabinePalier extends Evenement {
        L'instant précis où la cabine passe juste en face d'un étage précis.
        Vous pouvez modifier cette classe comme vous voulez (ajouter/modifier des méthodes etc.).
     */
+
+
+    // A corriger : Ne pas ouvrir la porte lorsque la cabine passe a un etage ou un passager allant dans le sens inverse souhaite monter (en mode parfait, pas num 148)
     
     private Etage étage;
     

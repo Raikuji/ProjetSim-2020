@@ -79,11 +79,11 @@ public class EvenementOuverturePorteCabine extends Evenement {
                 cabine.changerIntention('-');
             }
 
-            if (immeuble.passagerEnDessous(cabine.étage)) {
+            if (immeuble.passagerEnDessous(cabine.étage) && cabine.nbPassager() == 0) {
                 cabine.changerIntention('v');
             }
 
-            if (immeuble.passagerAuDessus(cabine.étage)) {
+            if (immeuble.passagerAuDessus(cabine.étage) && cabine.nbPassager() == 0) {
                 cabine.changerIntention('^');
             }
         }
